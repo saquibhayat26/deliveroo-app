@@ -1,8 +1,17 @@
-import { Text, View, Image, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { useFonts } from "expo-font";
 import * as Icons from "react-native-heroicons/outline";
+import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 // import * as SplashScreen from "expo-splash-screen";
 
 // SplashScreen.preventAutoHideAsync();
@@ -24,25 +33,53 @@ const HomeScreen = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={{ paddingTop: 8 }}>
-      <View style={{ paddingLeft: 14, paddingRight: 14 }}>
-        {/* HEADER */}
-        <View style={styles.container}>
-          <Image
-            style={styles.tinyLogo}
-            source={{
-              uri: "https://reactnative.dev/img/tiny_logo.png",
-            }}
-          />
-          <View style={styles.HeadingContainer}>
-            <Text style={styles.heading}>Deliver Now!</Text>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.subHeading}>Current Location </Text>
-              <Icons.ChevronDownIcon color={"#00ccbb"} size={20} />
-            </View>
+      {/* HEADER */}
+      <View style={styles.container}>
+        <Image
+          style={styles.tinyLogo}
+          source={{
+            uri: "https://reactnative.dev/img/tiny_logo.png",
+          }}
+        />
+        <View style={styles.HeadingContainer}>
+          <Text style={styles.heading}>Deliver Now!</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.subHeading}>Current Location </Text>
+            <Icons.ChevronDownIcon color={"#00ccbb"} size={20} />
           </View>
-          <Icons.UserIcon color={"#00ccbb"} size={35} />
+        </View>
+        <Icons.UserIcon color={"#00ccbb"} size={35} />
+      </View>
+
+      {/* SEARCH BOX */}
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBox}>
+          <Icons.MagnifyingGlassIcon
+            color={"gray"}
+            size={20}
+            style={{ marginRight: 8 }}
+          />
+          <TextInput
+            placeholder="Restaurants and cuisines"
+            keyboardType="default"
+          />
+        </View>
+        <View>
+          <Icons.AdjustmentsVerticalIcon color={"#00ccbb"} size={22} />
         </View>
       </View>
+
+      {/* BODY */}
+      <ScrollView>
+        {/* CATEGORIES */}
+        <Categories />
+
+        {/* FEATURED */}
+        <FeaturedRow
+          title={"Offers near you!"}
+          desc={"why not support your local restaurant tonight"}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -53,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 12,
   },
   tinyLogo: {
     height: 28,
@@ -73,5 +111,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Ubuntu-Bold",
+  },
+  searchContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 16,
+    paddingHorizontal: 18,
+  },
+  searchBox: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
